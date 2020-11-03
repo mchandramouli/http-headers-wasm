@@ -1,9 +1,10 @@
-.PHONY: clean test build build.docker
+.PHONY: clean test build build-docker
 
-build:
-	tinygo build -o ./hello_world.wasm -scheduler=none -target=wasi -wasm-abi=generic ./hello_world.go
+clean:
+	rm -rf *.wasm
 
-build.docker:
-	docker run -it -w /tmp/hello_world_wasm -v $(shell pwd):/tmp/hello_world_wasm tinygo/tinygo-dev:latest \
-		tinygo build -o /tmp/hello_world_wasm/hello_world.wasm -scheduler=none -target=wasi \
-		-wasm-abi=generic /tmp/hello_world_wasm/hello_world.go
+build: clean
+	tinygo build -o ./http-headers.wasm -scheduler=none -target=wasi -wasm-abi=generic ./main.go
+
+build-docker:
+	docker run -it -w /tmp/http-headers-wasm -v $(shell pwd):/tmp/http-headers-wasm tinygo/tinygo-dev:latest make build
