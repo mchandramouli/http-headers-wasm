@@ -1,0 +1,26 @@
+version: '3.7'
+
+services:
+  
+  proxy:
+    image: envoyproxy/envoy-dev:latest
+    entrypoint: ["/usr/local/bin/envoy","-c /tmp/http-headers-wasm/test/envoy-compose.yaml","--concurrency 2"]
+    restart: always
+    depends_on:
+      - web_service
+    networks:
+      - envoymesh
+    ports:
+      - "8000:18000"
+    volumes:
+      - .:/tmp/http-headers-wasm
+
+  web_service:
+    image: solsson/http-echo
+    environment:
+      PORT: 9000
+    networks:
+      - envoymesh
+
+networks:
+  envoymesh: {}
