@@ -5,7 +5,7 @@ build-with-docker:
 
 run-with-docker: build-with-docker
 	docker run \
-		-p 8000:18000 -p 8099:8099 \
+		-p 8000:18000 -p 8099:8099 -p 8001:8001 \
 		-w /tmp/http-headers-wasm -v $(shell pwd):/tmp/http-headers-wasm getenvoy/envoy:nightly \
 		-c /tmp/http-headers-wasm/test/envoy.yaml --concurrency 2
 

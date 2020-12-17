@@ -12,6 +12,7 @@ services:
       - envoymesh
     ports:
       - "8000:18000"
+      - "8001:8001"
     volumes:
       - .:/tmp/http-headers-wasm
 
