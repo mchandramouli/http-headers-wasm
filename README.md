@@ -30,3 +30,4 @@ $ docker-compose -f test/docker-compose.yaml --project-directory $(pwd) up
 
 Both of these expose the proxy in port `8000`. Try `curl http://localhost:8000 -v` and watch for response headers and proxy logs.
 
+----
